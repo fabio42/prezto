@@ -11,3 +11,19 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+# Add completion for awscli
+source /usr/local/Cellar/awscli/*/libexec/bin/aws_zsh_completer.sh
+
+# Add customs functions
+source "${ZDOTDIR:-$HOME}/.zprezto/zlocal"
+source "${ZDOTDIR:-$HOME}/.zprezto/zfunctions"
+
+# Alias
+alias tmux='tmux -2'
+alias pwgen='pwgen -s -B -C -n 16'
+alias terminal='open -a Terminal ~'
+alias brews='brew list -1'
+alias brew-update='brew update && brew outdated'
+alias brew-upgrade='brew upgrade && brew cleanup'
+alias cdchef='$HOME/git/chef'
+

@@ -1,7 +1,7 @@
 # Define Chef environnement
 CHEF_PRT="[%F{green}Q%F{reset%}] "
+export CHEF_ORG=$CHEF_QA_ENV
 chefenv () {
-  export CHEF_ORG=$CHEF_QA_ENV
   case $1 in
     p|prod) 
       export CHEF_ORG=$CHEF_PROD_ENV

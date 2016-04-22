@@ -3,11 +3,11 @@ CHEF_PRT="[%F{green}Q%F{reset%}] "
 export CHEF_ORG=$CHEF_QA_ENV
 chefenv () {
   case $1 in
-    p|prod) 
+    p|prod)
       export CHEF_ORG=$CHEF_PROD_ENV
       CHEF_PRT="[%F{red}P%F{reset%}] "
     ;;
-    ''|q|qa) 
+    ''|q|qa)
       export CHEF_ORG=$CHEF_QA_ENV
       CHEF_PRT="[%F{green}Q%F{reset%}] "
     ;;
@@ -18,14 +18,14 @@ chefenv () {
 
 # Shell history find
 fhist () {
-  history 1 | grep $1
+  history -i 1 | grep $1
 }
 
 # ssh-contrl
 ssh-ctrl () {
   username=$USER
   servername=''
-  if echo $1 | grep -q "@" ; then 
+  if echo $1 | grep -q "@" ; then
     username=$(echo $1|cut -d\@ -f1)
     servername=$(echo $1|cut -d\@ -f2)
    else
@@ -33,4 +33,9 @@ ssh-ctrl () {
   fi
   proxycmd="ssh $USER@$SSH_CONTROL nc $servername 22"
   ssh -o ProxyCommand="$proxycmd" $username@$servername
+}
+
+# Search in DNS templates
+dnssearch () {
+  grep -i $1 $DNS_TEMPLATES/*
 }

@@ -39,3 +39,16 @@ ssh-ctrl () {
 dnssearch () {
   grep -i $1 $DNS_TEMPLATES/*
 }
+
+# checks the DNS
+dnscheck () {
+  ext_dns="8.8.8.8"
+  local_dns=$(cat /etc/resolv.conf|grep nameserver | cut -d\  -f2)
+  authoritative_dns=$(dig $1 | grep -v '^;' | grep NS | awk -F\  '{print $5}' | sed 's/.$//')
+  [[ -z $authoritative_dns ]] && echo "Unknown domain: $1" && exit 1
+  for server in $(echo $authoritative_dns $local_dns $ext_dns); do
+    echo "== $server =="
+    dig +short @"$server" $1
+  done
+}
+

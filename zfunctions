@@ -7,6 +7,10 @@ chefenv () {
       export CHEF_ORG=$CHEF_PROD_ENV
       CHEF_PRT="[%F{red}P%F{reset%}] "
     ;;
+    d|dev)
+      export CHEF_ORG=$CHEF_DEV_ENV
+      CHEF_PRT="[%F{orange}D%F{reset%}] "
+    ;;
     ''|q|qa)
       export CHEF_ORG=$CHEF_QA_ENV
       CHEF_PRT="[%F{green}Q%F{reset%}] "

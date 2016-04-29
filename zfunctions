@@ -52,3 +52,10 @@ dnscheck () {
   done
 }
 
+# Knife
+kns () {
+  for env in $(echo $CHEF_PROD_ENV $CHEF_DEV_ENV $CHEF_QA_ENV); do
+    echo "=== looking in $env ==="
+    CHEF_ORG=$env knife node list | grep $1
+  done
+}
